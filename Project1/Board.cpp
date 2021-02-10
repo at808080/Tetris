@@ -94,3 +94,27 @@ bool Board::CheckForCollisionRotation(Tetrino t_)
 		return false;
 	}
 }
+
+bool Board::CheckForFullRow(int y_)
+{
+	bool fullrow = true;
+
+	for (int i = 0; fullrow && i < m_Width; i++)
+	{
+		if (m_Matrix[i][y_] == false) fullrow = false;
+	}
+
+	return fullrow;
+}
+
+void Board::RemoveFullRow(int y_)
+{
+	for (int j = y_; j > 0; j--)
+	{
+		for (int i = 0; i < m_Width; i++)
+		{
+			m_Matrix[i][j] = m_Matrix[i][j - 1];
+		}
+	}
+	
+}

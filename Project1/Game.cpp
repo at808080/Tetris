@@ -131,6 +131,10 @@ void Game::Update()
 		}
 		else
 		{
+			while (m_Boardd->CheckForFullRow(19))
+			{
+				m_Boardd->RemoveFullRow(19);
+			}
 			NewTetrino();
 		}
 		

@@ -15,8 +15,12 @@ class Board :
 public:
 	Board(int width_, int height_);
 	void SetOccupant(Tetrino t_, bool b_);
+
 	bool CheckForCollision(Tetrino t_, CollisionDirection d_);
 	bool CheckForCollisionRotation(Tetrino t_);
+
+	bool CheckForFullRow(int y_);
+	void RemoveFullRow(int y_);
 private:
 
 };
