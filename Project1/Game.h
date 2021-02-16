@@ -11,6 +11,7 @@
 #include "Tetrino.h"
 #include "Board.h"
 
+
 class Game
 {
 public:
@@ -53,6 +54,11 @@ private:
 	Uint32 lastKeyTime;
 	Uint32 keyTime;
 
+	int m_Tetrinos [4][4][2] = { {{1, 0}, {2, 0}, {3, 0}, {3, 1}},
+								 {{1, 0}, {2, 0}, {3, 0}, {2, 1}},
+							     {{1, 0}, {2, 0}, {1, 1}, {2, 1}},
+							     {{0, 0}, {1, 0}, {2, 0}, {3, 0}} };
+	int next_tetrino;
 	
 
 };

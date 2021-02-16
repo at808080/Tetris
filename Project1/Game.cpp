@@ -2,38 +2,12 @@
 
 Game::Game() : m_Running(false)
 {
-	/*xx = 10;
 
-	m_Board = new Matrix(10, 20);
-	m_Board->InitialiseFalse();
-
-	m_CurrentPiece = new Matrix(4, 4);
-	m_CurrentPiece->InitialiseFalse();
-	m_CurrentPiece->SetAtIndex(1, 1, true);
-	m_CurrentPiece->SetAtIndex(1, 2, true);
-	m_CurrentPiece->SetAtIndex(2, 1, true);
-	m_CurrentPiece->SetAtIndex(2, 2, true);
-
-	m_CurrentTetrino = new Tetrino(4, 4, 0);
-	m_CurrentTetrino->InitialiseFalse();
-	m_CurrentTetrino->SetAtIndex(1, 0, true);
-	m_CurrentTetrino->SetAtIndex(2, 0, true);
-	m_CurrentTetrino->SetAtIndex(3, 0, true);
-	m_CurrentTetrino->SetPos(Vector2i(2, 2));
-
-	m_Board->SetOccupant(4, 8, *m_CurrentPiece, true);
-	m_Board->SetOccupant(1, 1, *m_CurrentTetrino, true);*/
 
 	m_Boardd = new Board(10, 20);
 	m_Boardd->InitialiseFalse();
 
-	m_CurrentTetrino = new Tetrino(4, 4, Vector2i(0, 8));
-	m_CurrentTetrino->InitialiseFalse();
-	m_CurrentTetrino->SetAtIndex(1, 0, true);
-	m_CurrentTetrino->SetAtIndex(2, 0, true);
-	m_CurrentTetrino->SetAtIndex(3, 0, true);
-	m_CurrentTetrino->SetAtIndex(3, 1, true);
-	m_CurrentTetrino->SetPos(Vector2i(2, 5));
+	NewTetrino();
 
 	m_Boardd->SetOccupant(*m_CurrentTetrino, true);
 
@@ -131,10 +105,14 @@ void Game::Update()
 		}
 		else
 		{
-			while (m_Boardd->CheckForFullRow(19))
+			for (int i = 19; i > 0; i--)
 			{
-				m_Boardd->RemoveFullRow(19);
+				while (m_Boardd->CheckForFullRow(i))
+				{
+					m_Boardd->RemoveFullRow(i);
+				}
 			}
+			
 			NewTetrino();
 		}
 		
@@ -221,12 +199,22 @@ void Game::UpdateCurrentTetrino()
 void Game::NewTetrino()
 {
 	delete m_CurrentTetrino;
+
+	next_tetrino = rand() % 4;
+
 	m_CurrentTetrino = new Tetrino(4, 4, Vector2i(0, 0));
 	m_CurrentTetrino->InitialiseFalse();
-	m_CurrentTetrino->SetAtIndex(1, 0, true);
+
+	for (int i = 0; i < 4; i++)
+	{
+		m_CurrentTetrino->SetAtIndex(m_Tetrinos[next_tetrino][i][0], 
+									 m_Tetrinos[next_tetrino][i][1], 
+									 true);
+	}
+	/*m_CurrentTetrino->SetAtIndex(1, 0, true);
 	m_CurrentTetrino->SetAtIndex(2, 0, true);
 	m_CurrentTetrino->SetAtIndex(3, 0, true);
-	m_CurrentTetrino->SetAtIndex(3, 1, true);
+	m_CurrentTetrino->SetAtIndex(3, 1, true);*/
 	m_CurrentTetrino->SetPos(Vector2i(2, 2));
 
 	m_Boardd->SetOccupant(*m_CurrentTetrino, true);
