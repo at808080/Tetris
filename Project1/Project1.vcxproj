@@ -145,12 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="01_hello_SDL.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="Settings.cpp" />
     <ClCompile Include="Tetrino.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Vector2f.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="Settings.h" />
     <ClInclude Include="Tetrino.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Vector2f.h" />

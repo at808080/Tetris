@@ -10,7 +10,16 @@
 #include "Matrix.h"
 #include "Tetrino.h"
 #include "Board.h"
+#include "Settings.h"
 
+enum DifficultySetting
+{
+	Imbecile = 0,
+	Battler = 1,
+	Joe = 2,
+	HotShot = 3,
+	Prodigy = 4
+};
 
 class Game
 {
@@ -47,17 +56,21 @@ private:
 
 	int xx;
 	int framestart;
-	Uint32 last;
-	Uint32 time;
+	int last;
+	int time;
 	//TextureManager m_TextureManager;
 
-	Uint32 lastKeyTime;
-	Uint32 keyTime;
+	int lastKeyTime;
+	int keyTime;
 
 	int m_Tetrinos [4][4][2] = { {{1, 0}, {2, 0}, {3, 0}, {3, 1}},
 								 {{1, 0}, {2, 0}, {3, 0}, {2, 1}},
 							     {{1, 0}, {2, 0}, {1, 1}, {2, 1}},
 							     {{0, 0}, {1, 0}, {2, 0}, {3, 0}} };
+
+	Settings m_SettingsChoices[5];
+	DifficultySetting m_CurrentSettingsChoice;
+
 	int next_tetrino;
 	
 

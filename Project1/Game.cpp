@@ -2,7 +2,15 @@
 
 Game::Game() : m_Running(false)
 {
+	m_SettingsChoices[0] = Settings(200, 800);
 
+	for (int i = 0; i < 5; i++)
+	{
+		m_SettingsChoices[i] = Settings(50 * ( 5 - i ), 200 * (5 - i));
+		std::cout << "SC " << m_SettingsChoices[i].GetInputTime() << " " << m_SettingsChoices[i].GetGravityTime() << std::endl;
+	}
+
+	m_CurrentSettingsChoice = Joe;
 
 	m_Boardd = new Board(10, 20);
 	m_Boardd->InitialiseFalse();
@@ -40,7 +48,6 @@ void Game::Init(const char* title_, int xpos_, int ypos_, int width_, int height
 			if (m_Renderer != nullptr)
 			{
 				std::cout << "Renderer created successfully";
-				SDL_SetRenderDrawColor(m_Renderer, 10, 100, 10, 255);
 			}
 			else
 			{
@@ -85,16 +92,23 @@ void Game::Update()
 
 	time += SDL_GetTicks() - last;
 	last = SDL_GetTicks();
-	//std::cout << std::endl << " TIME : " << time << " " << SDL_GetTicks();
 
 	keyTime += SDL_GetTicks() - lastKeyTime;
 	lastKeyTime = SDL_GetTicks();
-	if (keyTime > 200)
+
+	/*
+	Update the current Tetrino with mouse input 
+	This includes movement left, right or down, rotation
+	*/
+	if (keyTime > m_SettingsChoices[m_CurrentSettingsChoice].GetInputTime())
 	{
 		UpdateCurrentTetrino();
 	}
 
-	if (time > 800)
+	/*
+	Apply gravity (Downward motion) to the current Tetrino 
+	*/
+	if (time > m_SettingsChoices[m_CurrentSettingsChoice].GetGravityTime())
 	{
 		time = 0;
 		if (m_Boardd->CheckForCollision(*m_CurrentTetrino, Down) == false)
@@ -211,10 +225,7 @@ void Game::NewTetrino()
 									 m_Tetrinos[next_tetrino][i][1], 
 									 true);
 	}
-	/*m_CurrentTetrino->SetAtIndex(1, 0, true);
-	m_CurrentTetrino->SetAtIndex(2, 0, true);
-	m_CurrentTetrino->SetAtIndex(3, 0, true);
-	m_CurrentTetrino->SetAtIndex(3, 1, true);*/
+
 	m_CurrentTetrino->SetPos(Vector2i(2, 2));
 
 	m_Boardd->SetOccupant(*m_CurrentTetrino, true);
