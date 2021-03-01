@@ -7,12 +7,10 @@ Board::Board(int width_, int height_) : Matrix(width_, height_)
 
 void Board::SetOccupant(Tetrino t_, bool b_)
 {
-	//std::cout << std::endl << "Setting occupant at " << t_.GetPos().getX() << " " << t_.GetPos().getY() << " " << t_.Width() << " " << t_.Height();
 	for (int i = t_.GetPos().getX(); i - t_.GetPos().getX() < t_.Width(); i++)
 	{
 		for (int j = t_.GetPos().getY() ; j - t_.GetPos().getY() < t_.Height(); j++)
 		{
-			//std::cout << std::endl << "current:  " << i << " " << j << " ";
 			if (t_.GetAtIndex(i - t_.GetPos().getX(), j - t_.GetPos().getY()) == true)
 			{
 				m_Matrix[i][j] = b_;
